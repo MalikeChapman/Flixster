@@ -56,12 +56,12 @@ Describe any challenges encountered while building the app.
 - [ ] (2pts) For popular movies (i.e. a movie voted for more than 5 stars), the full backdrop image is displayed. Otherwise, a poster image, the movie title, and overview is listed. Use Heterogenous RecyclerViews and use different ViewHolder layout files for popular movies and less popular ones.
 
 ### App Walkthough GIF
-`TODO://` Add the URL to your animated app walkthough `gif` in the image tag below, `YOUR_GIF_URL_HERE`. Make sure the gif actually renders and animates when viewing this README. (🚫 Remove this paragraph after after adding gif)
 
-<img src="YOUR_GIF_URL_HERE" width=250><br>
+<img src="FlixsterWalkThrough.gif" width=250><br>
 
 ### Notes
 Describe any challenges encountered while building the app.
+I had some troubles styling the UI for the app. I also had some confusion between style and theme. Changing the color for the background to what I wanted didn't work as i planned so I improvised. Later hopefully I will be able to learn about the different things I could do.
 
 ### Open-source libraries used
 
