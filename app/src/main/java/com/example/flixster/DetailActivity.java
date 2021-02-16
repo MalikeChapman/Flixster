@@ -102,6 +102,14 @@ public class DetailActivity extends YouTubeBaseActivity {
                     }
 
                 } else {
+                    if (reference.getRating() <= 5){
+                        youTubePlayer.cueVideo(youtubeKey);
+
+
+                    }
+                    else {
+                        youTubePlayer.loadVideo(youtubeKey);
+                    }
 
                 }
 
