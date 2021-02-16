@@ -2,6 +2,9 @@ package com.example.flixster;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.RatingBar;
@@ -22,12 +25,15 @@ import org.parceler.Parcels;
 import okhttp3.Headers;
 
 public class DetailActivity extends YouTubeBaseActivity {
+
     private static final String YOUTUBE_API_KEY = "AIzaSyC1qS9fMGyZi5NB7gSEaE2fdswirrluem0";
-    private static final String VIDEOS_URL = "https://api.themoviedb.org/3/movie/%d/videos?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed";
+    private  static final String VIDEOS_URL = "https://api.themoviedb.org/3/movie/%d/videos?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed";
     TextView tvTitle;
     TextView tvOverview;
     RatingBar ratingbar;
     YouTubePlayerView mYouTubePlayerView;
+    Movie reference;
+    Context mContext = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,9 +47,12 @@ public class DetailActivity extends YouTubeBaseActivity {
 
 
         Movie movie = Parcels.unwrap(getIntent().getParcelableExtra("movie"));
+        reference = movie;
         tvTitle.setText(movie.getTitle());
         tvOverview.setText(movie.getOverview());
         ratingbar.setRating((float) movie.getRating());
+
+
 
 
         AsyncHttpClient client = new AsyncHttpClient();
@@ -80,16 +89,31 @@ public class DetailActivity extends YouTubeBaseActivity {
             @Override
             public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
                 Log.d("DetailActivity", "onInitializationSuccess");
-                youTubePlayer.cueVideo(youtubeKey);
+                if (mContext.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE){
+                    youTubePlayer.setFullscreen(true);
+
+                    if (reference.getRating() <= 5){
+                        youTubePlayer.cueVideo(youtubeKey);
+
+
+                    }
+                    else {
+                        youTubePlayer.loadVideo(youtubeKey);
+                    }
+
+                } else {
+
+                }
+
             }
 
             @Override
             public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult youTubeInitializationResult) {
                 Log.d("DetailActivity", "onInitializationFailure");
 
-
             }
         });
     }
+
 
 }
